@@ -17,9 +17,9 @@ const menuItems = [
     subTitle: 'Contador Client Side',
   },
   {
-    path: '/dashboard/pokemon',
+    path: '/dashboard/pokemons',
     icon: <CgPokemon size={40} />,
-    title: 'Pokémon',
+    title: 'Pokémons',
     subTitle: 'Pokémon disponibles',
   },
 ];
@@ -29,7 +29,7 @@ export const Sidebar = () => {
     <div
       id='menu'
       style={{ width: '400px' }}
-      className='bg-gray-900 min-h-screen z-10 text-slate-300 w-64 left-0 overflow-y-scroll'
+      className='bg-gray-900 min-h-screen z-10 text-slate-300 w-64 left-0'
     >
       <div id='logo' className='my-4 px-6'>
         <h1 className='text-lg flex items-center md:text-2xl font-bold text-white'>
