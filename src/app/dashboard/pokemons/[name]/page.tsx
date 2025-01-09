@@ -1,44 +1,37 @@
-import type { Pokemon } from '@/pokemons/interfaces/pokemon';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import type { Pokemon } from '@/pokemons/interfaces/pokemon';
+import type { PokemonResponse } from '@/pokemons/interfaces/pokemon-response';
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: Promise<{ name: string }>;
 }
 
 export async function generateStaticParams() {
-  const static151Pokémon = Array.from({ length: 151 }).map(
-    (v, i) => `${i + 1}`
-  );
-  return static151Pokémon.map((id) => ({ id: id }));
+  const response: PokemonResponse = await fetch(
+    `https://pokeapi.co/api/v2/pokemon?limit=151&offset=0`
+  ).then((res) => res.json());
+
+  const names = response.results.map((pokemon) => ({ name: pokemon.name }));
+
+  return names.map(({ name }) => ({ name }));
 }
 
-export const generateMetadata = async ({
-  params,
-}: Props): Promise<Metadata> => {
-  try {
-    const { id } = await params;
-    const pokemon = await getPokemon(id);
-    return {
-      title: `#${pokemon.id} - ${pokemon.name}`,
-      description: `Página del pokémon ${pokemon.name}`,
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      title: 'No existe el Pokémon',
-      description: 'El Pokémon buscado no se encuentra disponible',
-    };
-  }
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { name } = await params;
+  const pokemon = await getDataPerName(name);
+  return {
+    title: `#${pokemon.id} - ${pokemon.name}`,
+    description: `Página del Pokémon - ${pokemon.name}`,
+  };
+}
 
-const getPokemon = async (id: string): Promise<Pokemon> => {
+const getDataPerName = async (name: string): Promise<Pokemon> => {
   try {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
-      // cache: 'force-cache',
-      next: { revalidate: 60 * 60 * 24 * 30 * 6 }, // Sirve para revalidar la petición, según cambie tu Base de Datos
-    }).then((res) => res.json());
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${name}`
+    ).then((res) => res.json());
 
     return response;
   } catch (error) {
@@ -47,9 +40,10 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
   }
 };
 
-export default async function PokemonPage({ params }: Props) {
-  const { id } = await params;
-  const pokemon = await getPokemon(id);
+export default async function PokemonsPage({ params }: Props) {
+  const { name } = await params;
+
+  const pokemon = await getDataPerName(name);
 
   return (
     <div className='flex mt-5 flex-col items-center text-slate-800'>

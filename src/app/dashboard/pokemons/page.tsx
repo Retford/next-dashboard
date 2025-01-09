@@ -1,6 +1,6 @@
-import { PokemonGrid } from '@/app/pokemons/components/PokemonGrid';
-import { PokemonResponse } from '@/app/pokemons/interfaces/pokemon-response';
-import type { SimplePokemon } from '@/app/pokemons/interfaces/simple-pokemon';
+import { PokemonGrid } from '@/pokemons/components/PokemonGrid';
+import type { PokemonResponse } from '@/pokemons/interfaces/pokemon-response';
+import type { SimplePokemon } from '@/pokemons/interfaces/simple-pokemon';
 
 export const metadata = {
   title: 'Pokémon',
@@ -24,7 +24,7 @@ const getPokemons = async (
 };
 
 export default async function PokemonsPage() {
-  const pokemons = await getPokemons();
+  const pokemons = await getPokemons(151);
 
   return (
     <div className='flex flex-col p-2'>

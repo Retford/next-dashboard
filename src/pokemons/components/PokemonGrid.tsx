@@ -1,4 +1,4 @@
-import { SimplePokemon } from '../interfaces/simple-pokemon';
+import type { SimplePokemon } from '../interfaces/simple-pokemon';
 import { PokemonCard } from './PokemonCard';
 
 interface Props {

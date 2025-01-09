@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { SimplePokemon } from '../interfaces/simple-pokemon';
 import Image from 'next/image';
 import { IoHeartOutline } from 'react-icons/io5';
+import type { SimplePokemon } from '../interfaces/simple-pokemon';
 
 interface Props {
   pokemon: SimplePokemon;
@@ -20,13 +20,14 @@ export const PokemonCard = ({ pokemon }: Props) => {
             height={100}
             alt={name}
             priority={false}
+            className='w-auto h-auto'
           />
           <p className='pt-2 text-lg font-semibold text-gray-50 capitalize'>
             {name}
           </p>
           <div className='mt-5'>
             <Link
-              href={`/dashboard/pokemon/${id}`}
+              href={`/dashboard/pokemons/${name}`}
               className='border rounded-full py-2 px-4 text-xs font-semibold text-gray-100'
             >
               Más información

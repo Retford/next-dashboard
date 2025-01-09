@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { IoBrowsersOutline, IoCalculator, IoLogoReact } from 'react-icons/io5';
-import { SidebarMenuItems } from './SidebarMenuItems';
 import { CgPokemon } from 'react-icons/cg';
+import { SidebarMenuItems } from './SidebarMenuItems';
 
 const menuItems = [
   {
