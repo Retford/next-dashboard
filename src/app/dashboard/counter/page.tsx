@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Shopping Cart Page by NextJS',
 };
 
-export default function CounterPage() {
+export default async function CounterPage() {
   return (
     <div className='flex flex-col items-center justify-center w-full h-full'>
       <span>Productos del carrito</span>
