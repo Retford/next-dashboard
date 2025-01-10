@@ -25,6 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='es'>
+      <link rel='icon' href='/pokemon.svg' type='images/x-icon' />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

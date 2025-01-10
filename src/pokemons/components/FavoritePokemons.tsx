@@ -7,14 +7,14 @@ import { useEffect, useState } from 'react';
 
 export const FavoritePokemons = () => {
   const favoritePokemons = useAppSelector((state) =>
-    Object.values(state.pokemons)
+    Object.values(state.pokemons.favorites)
   );
   const [pokemons, setPokemons] = useState(favoritePokemons);
 
   useEffect(() => {
     setTimeout(() => {
       setPokemons(favoritePokemons);
-    }, 1500);
+    }, 500);
   }, [favoritePokemons]);
 
   return (
